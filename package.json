@@ -9,10 +9,11 @@
   "dependencies": {
     "bulma": "^0.7.4",
     "register-service-worker": "^1.6.2",
-    "vue": "^2.6.6",
+    "vue": "^2.6.10",
     "vue-cookies": "^1.5.13",
     "vue-router": "^3.0.1",
-    "vue2-toast": "^2.0.2"
+    "vue2-toast": "^2.0.2",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-pwa": "^3.5.0",

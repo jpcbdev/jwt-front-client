@@ -28,6 +28,15 @@ export default new Router({
           path: '/profile',
           name: 'profile',
           component: VProfile,
+          beforeEnter: function (to: any, from: any, next: any) {
+            if (localStorage.getItem('jwt')) {
+              console.log('Esta logeado');
+              next();
+            } else {
+              console.log('No esta logeado');
+              next('/signin');
+            }
+          }
         },
       ],
     },

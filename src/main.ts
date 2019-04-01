@@ -7,6 +7,7 @@ import 'bulma/css/bulma.min.css'
 import VueCookies from 'vue-cookies';
 
 import 'vue2-toast/lib/toast.css';
+import store from './store'
 const Toast = require('vue2-toast');
 Vue.use(Toast, {
   type: 'center',
@@ -20,5 +21,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
-  render: (h) => h(App),
+  store,
+  render: (h) => h(App)
 }).$mount('#app');
