@@ -1,44 +1,41 @@
 <template>
-  <div class="hero">
-    <div class="hero-body">
-      <h1 class="title is-1">Hi {{userData.username}}</h1>
-      <h1 class="title is-2">Your email is: {{userData.email}}</h1>
-      <h1>This is your profile</h1>
-      <button class="button is-warning" v-on:click="signOut">Cerrar sesion</button>
+  <div>
+    <nav class="navbar is-black">
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" v-on:click="signOut">Cerrar sesion</a>
+        </div>
+      </div>
+    </nav>
+    <div class="hero">
+      <div class="hero-body">
+        <h1 class="title is-1">Hi {{userData.username}}</h1>
+        <h1 class="title is-2">Your email is: {{userData.email}}</h1>
+        <h1>This is your profile</h1>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import services from "../services/authentication";
-import router from "../router";
-import { userData } from "../models/userData";
+import store from "../store";
+
 export default Vue.extend({
   data() {
-    return {
-      userData: {} as userData
-    };
+    return {};
   },
   mounted() {
-    console.log(localStorage.getItem("jwt"));
-    if (localStorage.getItem("jwt")) {
-      services
-        .getProfile(localStorage.getItem("jwt"))
-        .then(res => {
-          this.userData = res;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    } else {
-      router.push("/");
-    }
+    store.dispatch("getProfile", store.getters.getToken);
   },
   methods: {
     signOut() {
-      localStorage.removeItem("jwt");
-      router.push("/");
+      store.commit("signOut");
+    }
+  },
+  computed: {
+    userData: () => {
+      return store.getters.getUserData;
     }
   }
 });

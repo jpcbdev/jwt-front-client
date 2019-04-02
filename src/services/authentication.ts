@@ -9,15 +9,15 @@ export default {
             body: JSON.stringify(body),
             headers: { 'Content-Type': 'application/json' },
         }).then((res) => res.json())
-        .catch((err)=> {console.log(err)});
+            .catch((err) => { console.log(err) });
     },
     postSignUp: async (body: signup) => {
         return await fetch(`${url}/signup`, {
             method: 'POST',
+            body: JSON.stringify(body),
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body)
         }).then((res) => res.json())
-        .catch((err)=> {console.log(err)});
+            .catch((err) => { console.log(err) });
     },
     getProfile: async (token: string) => {
         return await fetch(`${url}/profile`, {
@@ -27,7 +27,7 @@ export default {
             },
 
         }).then((res) => res.json())
-        .catch((err)=> {console.log(err)});
+            .catch((err) => { console.log(err) });
     },
 
 };

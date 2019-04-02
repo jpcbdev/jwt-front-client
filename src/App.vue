@@ -9,9 +9,6 @@
 import Vue from "vue";
 import TheHome from "./pages/TheHome.vue";
 export default Vue.extend({
-  mounted(){
-    
-  }
 });
 </script>
 

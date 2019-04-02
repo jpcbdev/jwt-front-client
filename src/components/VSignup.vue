@@ -12,7 +12,7 @@
           <label class="label" for="username">Username</label>
           <div class="control">
             <input
-              type="password"
+              type="text"
               name="username"
               placeholder="Username"
               v-model="signupModel.username"
@@ -32,7 +32,6 @@
         </div>
         <input type="submit" value="Sign Up" class="button is-primary">
       </form>
-      <div>{{signupModel}}</div>
     </div>
   </section>
 </template>
@@ -43,6 +42,7 @@ import Vue from "vue";
 import { signup } from "../models/signup";
 import services from "../services/authentication";
 import router from "../router";
+import store from "../store";
 
 export default Vue.extend({
   data() {
@@ -50,24 +50,10 @@ export default Vue.extend({
       signupModel: {} as signup
     };
   },
-  created() {
-    if (localStorage.getItem("jwt")) {
-      router.push("/profile");
-    }
-  },
   methods: {
     async postSignUp(e: any) {
       e.preventDefault();
-      services
-        .postSignUp(this.signupModel)
-        .then(res => {
-          this.$toast.bottom("Registro exitoso");
-          router.push("/signin");
-        })
-        .catch(err => {
-          this.signupModel = {} as signup;
-          this.$toast.bottom("Error al registrar el usuario");
-        });
+      store.dispatch("postSignUp", this.signupModel);
     }
   }
 });
